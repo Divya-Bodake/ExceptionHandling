@@ -38,5 +38,21 @@ namespace MoodAnalyserProblemTest
             string result = analyse.AnalyzeMood();
             Assert.AreEqual(result, "Happy");
         }
+        [Test]
+        public void GivenNullMessage_ThrowsMoodAnalysisExceptionNullMessage()
+        {
+            try
+            {
+                //Arrange
+                string message = null;
+                MoodAnalyser analyse = new MoodAnalyser(message);
+                //Act
+                string mood = analyse.AnalyzeMood();
+            }
+            catch (MoodAnalyzerCustomException ex)
+            {
+                Assert.AreEqual("Message should not be null", ex.Message);
+            }
+        }
     }
 }
